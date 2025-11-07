@@ -20,13 +20,45 @@ public class Heap {
     }
 
     public void insert(Integer k) {
-        // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented");
+        array.add(k);
+        int i = array.size() - 1;
+        while (i > 1 && array.get(parentOf(i)) > array.get(i)) {
+            swap(i, parentOf(i));
+            i = parentOf(i);
+        }
     }
 
+
     public int takeMinimum() {
-        // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented");
+        if (array.size() <= 1) {
+            throw new RuntimeException("Heap is empty");
+        }
+        int min = array.get(1);
+        int last = array.remove(array.size() - 1);
+        if (array.size() == 1) {
+            return min;
+        }
+        array.set(1, last);
+        int i = 1;
+        while (true) {
+            int left = leftChildOf(i);
+            int right = rightChildOf(i);
+            int smallest = i;
+
+            if (left < array.size() && array.get(left) < array.get(smallest)) {
+                smallest = left;
+            }
+            if (right < array.size() && array.get(right) < array.get(smallest)) {
+                smallest = right;
+            }
+            if (smallest != i) {
+                swap(i, smallest);
+                i = smallest;
+            } else {
+                break;
+            }
+        }
+        return min;
     }
 
     public void decreaseKey(int i, int k) {
