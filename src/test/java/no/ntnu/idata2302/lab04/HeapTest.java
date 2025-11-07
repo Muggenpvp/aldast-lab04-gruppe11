@@ -45,4 +45,31 @@ public class HeapTest {
         assertEquals(9, (int) minimum);
     }
 
+    @Test
+    public void decreaseKeyBecomesNewMinimum() {
+        var heap = Heap.fromValues(10, 20, 5, 23, 9);
+
+        heap.decreaseKey(3, 2);
+
+        var minimum = heap.takeMinimum();
+        assertEquals(2, (int) minimum);
+    }
+
+    @Test
+    public void decreaseKeyKeepsCurrentMinimumButBecomesNext() {
+        var heap = Heap.fromValues(10, 20, 5, 23, 9);
+
+        heap.decreaseKey(2, 8);
+
+        assertEquals(5, (int) heap.takeMinimum());
+        assertEquals(8, (int) heap.takeMinimum());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void decreaseKeyThrowsIfNotSmaller() {
+        var heap = Heap.fromValues(10, 20, 5, 23, 9);
+
+        heap.decreaseKey(3, 10);
+    }
+
 }

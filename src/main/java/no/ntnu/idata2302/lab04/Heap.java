@@ -62,8 +62,20 @@ public class Heap {
     }
 
     public void decreaseKey(int i, int k) {
-        // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented");
+        if (i <= 0 || i >= array.size()) {
+            throw new RuntimeException("Index out of bounds");
+        }
+
+        int current = array.get(i);
+        if (k >= current) {
+            throw new RuntimeException("New key must be smaller than current value");
+        }
+
+        array.set(i, k);
+        while (i > 1 && array.get(parentOf(i)) > array.get(i)) {
+            swap(i, parentOf(i));
+            i = parentOf(i);
+        }
     }
 
     private int parentOf(int index) {
