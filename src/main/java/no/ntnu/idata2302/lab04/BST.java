@@ -1,5 +1,7 @@
 package no.ntnu.idata2302.lab04;
 
+import java.util.ArrayList;
+
 public class BST {
 
     public static BST fromValues(int... values) {
@@ -26,15 +28,15 @@ public class BST {
         // TODO: Implement this operation
 
         if (givenValue < value) {
-            if(hasLeft()) {
+            if (hasLeft()) {
                 left.insert(givenValue);
             } else {
                 left = new BST(givenValue);
             }
         } else if (givenValue > value) {
-            if(hasRight()) {
+            if (hasRight()) {
                 right.insert(givenValue);
-            }else {
+            } else {
                 right = new BST(givenValue);
             }
         }
@@ -49,13 +51,13 @@ public class BST {
         // TODO: implement this operation
         int count = 1;
         if (hasLeft()) {
-            count+=left.size();
+            count += left.size();
         }
         if (hasRight()) {
-            count+=right.size();
+            count += right.size();
         }
         return count;
-       
+
         //throw new RuntimeException("Not yet implemented!");
     }
 
@@ -172,10 +174,20 @@ public class BST {
     }
 
     public String format() {
-        // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented!");
-    }
+        StringBuilder sb = new StringBuilder();
+        int current = minimum();
+        sb.append(current);
 
+        while (true) {
+            try {
+                current = successor(current);
+                sb.append(",").append(current);
+            } catch (SuccessorNotFound e) {
+                break;
+            }
+        }
+        return sb.toString();
+    }
 }
 
 class NoSuchValue extends RuntimeException {
