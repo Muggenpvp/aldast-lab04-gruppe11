@@ -24,7 +24,22 @@ public class BST {
 
     public BST insert(int givenValue) {
         // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented");
+
+        if (givenValue < value) {
+            if(hasLeft()) {
+                left.insert(givenValue);
+            } else {
+                left = new BST(givenValue);
+            }
+        } else if (givenValue > value) {
+            if(hasRight()) {
+                right.insert(givenValue);
+            }else {
+                right = new BST(givenValue);
+            }
+        }
+        return this;
+        //throw new RuntimeException("Not yet implemented");
     }
 
     /**
@@ -32,7 +47,16 @@ public class BST {
      */
     public int size() {
         // TODO: implement this operation
-        throw new RuntimeException("Not yet implemented!");
+        int count = 1;
+        if (hasLeft()) {
+            count+=left.size();
+        }
+        if (hasRight()) {
+            count+=right.size();
+        }
+        return count;
+       
+        //throw new RuntimeException("Not yet implemented!");
     }
 
     private boolean hasLeft() {
@@ -45,14 +69,20 @@ public class BST {
 
     int minimum() {
         // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented!");
-
+        if (hasLeft()) {
+            return left.minimum();
+        }
+        return value;
+        //throw new RuntimeException("Not yet implemented!");
     }
 
     int maximum() {
         // TODO: Implement this operation
-        throw new RuntimeException("Not yet implemented!");
-
+        if (hasRight()) {
+            return right.maximum();
+        }
+        return value;
+        //throw new RuntimeException("Not yet implemented!");
     }
 
     boolean contains(int givenValue) {
