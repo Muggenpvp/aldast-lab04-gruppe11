@@ -25,8 +25,6 @@ public class BST {
     }
 
     public BST insert(int givenValue) {
-        // TODO: Implement this operation
-
         if (givenValue < value) {
             if (hasLeft()) {
                 left.insert(givenValue);
@@ -41,14 +39,12 @@ public class BST {
             }
         }
         return this;
-        //throw new RuntimeException("Not yet implemented");
     }
 
     /**
      * @return the number of items in this tree
      */
     public int size() {
-        // TODO: implement this operation
         int count = 1;
         if (hasLeft()) {
             count += left.size();
@@ -57,8 +53,6 @@ public class BST {
             count += right.size();
         }
         return count;
-
-        //throw new RuntimeException("Not yet implemented!");
     }
 
     private boolean hasLeft() {
@@ -70,21 +64,17 @@ public class BST {
     }
 
     int minimum() {
-        // TODO: Implement this operation
         if (hasLeft()) {
             return left.minimum();
         }
         return value;
-        //throw new RuntimeException("Not yet implemented!");
     }
 
     int maximum() {
-        // TODO: Implement this operation
         if (hasRight()) {
             return right.maximum();
         }
         return value;
-        //throw new RuntimeException("Not yet implemented!");
     }
 
     boolean contains(int givenValue) {
